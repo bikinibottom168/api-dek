@@ -9,6 +9,8 @@ class Group extends Model
 {
     use HasFactory;
 
+    protected $visible = ['label', 'children'];
+
     public function children()
     {
         return $this->hasMany(Zone::class, 'groups_id', 'id');

@@ -39,7 +39,11 @@ class ApiController extends Controller
         //     ->Join('groups','zones.groups_id','=','groups.id')
         //     ->select('zones.id','zones.title as label','zones.groups_id','zones.order','groups.title as title_groups')
         //     ->get();
-        $data = Group::with('children')->orderBy('label', 'asc')->get();
+        if (request()->all) {
+            $data = Zone::orderBy('order', 'asc')->get();
+        } else {
+            $data = Group::with('children')->orderBy('label', 'asc')->get();
+        }
 
         return response()->json(['data' => $data]);
     }
